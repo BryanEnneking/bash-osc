@@ -14,8 +14,8 @@ Be sure to set the IP and port as mentioned above.
 
 **Usage:** osc *address* *type_tags* *argument_1* [*argument_2*...]
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| | |
-|--
+|                      |                                            |
+|----------------------|--------------------------------------------|
 | **address**          | The OSC address string (e.g. /path/method) |
 | **type_tags** &nbsp; | Character(s) indicating the types of *argument* in order <ul><li>``'s'`` for string</li><li>``'i'`` for integer</li><li>``'f'`` for float</li></ul> |
 | **argument**         | Argument(s) corresponding to the types defined by *type_tags*<br>**Note: float arguments must be specified in hexidecimal** |
