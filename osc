@@ -1,0 +1,57 @@
+#!/bin/bash
+
+show_help() {
+    echo "Usage: osc <address> <type tags> <argument 1> [<argument 2>...]"
+    echo "Send an Open Sound Control (OSC) message via UDP"
+    echo
+    echo "  <address>    The OSC address string (e.g. /path/method)"
+    echo "  <type tags>  Character(s) indicating the types of <argument> in order"
+    echo "               's' for strings, 'i' for integers, and 'f' for floats."
+    echo "  <argument>   Argument(s) corresponding to the types defined by <type tags>"
+    echo "               **Note: float arguments must be specified in hexidecimal**"
+    echo
+    echo "Example 1: osc /ch/29/config/name s \"Bass Amp\""
+    echo "  Sends an OSC message with a single string to set the name of channel 29"
+    echo
+    echo "Example 2: osc /dca/4/fader f 3f400000"
+    echo "  Sends an OSC message with a single float to set the DCA 4 fader level"
+    echo
+    echo "Example 3: osc /channel/75/config ssif \"Cello 5\" ON 13 00000000"
+    echo "  Sends an OSC message with two strings, an integer, and a float argument"
+    echo
+    echo "The variables OSC_IP and OSC_PORT must be set before using Bash OSC."
+    echo "  export OSC_IP=169.254.246.252"
+    echo "  export OSC_PORT=10023"
+    echo
+}
+
+send_osc_message() {
+    local osc_message=""
+    local tag_pos=0;
+    local type_tags="ss$2"   # prepend tags for address and tags strings
+    local arguments=("$@")   # treat address, tags, and OSC arguments the same
+    arguments[1]=",$2"       # OSC tags string must start with a ','
+    for arg in "${arguments[@]}"; do
+        local current_tag=${type_tags:tag_pos:1}
+        case $current_tag in
+            s) osc_message+="$arg\0"
+               local padding=$(((4 - ((${#arg} + 1) % 4)) % 4))
+               for ((i = 0; i < padding; i++)); do
+                   osc_message+='\0'
+               done;;
+            i) printf -v arg "%08X" "$arg";&  # convert to hex and fall through
+            f) osc_message+="\x${arg:0:2}\x${arg:2:2}\x${arg:4:2}\x${arg:6:2}";;
+        esac
+        ((tag_pos++));
+    done
+    echo -ne "$osc_message" > /dev/udp/$OSC_IP/$OSC_PORT
+}
+
+# handle direct invocations
+if [[ "$0" == "${BASH_SOURCE[0]}" ]]; then
+    if [[ $# -lt 3 ]]; then
+        show_help
+    else
+        send_osc_message "$@"
+    fi
+fi
