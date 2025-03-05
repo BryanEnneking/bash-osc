@@ -13,7 +13,6 @@ export OSC_PORT=10023
 Be sure to set the IP and port as mentioned above.
 
 **Usage:** osc *address* *type_tags* *argument_1* [*argument_2*...]
-
 |                      |                                            |
 |----------------------|--------------------------------------------|
 | **address**          | The OSC address string (e.g. /path/method) |
@@ -44,7 +43,7 @@ osc /channel/75/config ssif "Cello 5" ON 13 00000000
 ### As a Library
 
 ```bash
-source ~/bin/osc
+source path/to/osc
 OSC_IP=169.254.246.252
 OSC_PORT=10023
 ```
