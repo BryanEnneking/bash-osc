@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Copyright (c) 2025, Bryan Enneking
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -29,7 +28,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-show_help() {
+show_osc_help() {
     echo "Usage: osc <address> <type tags> <argument 1> [<argument 2>...]"
     echo "Send an Open Sound Control (OSC) message via UDP"
     echo
@@ -79,7 +78,7 @@ send_osc_message() {
 # handle direct invocations
 if [[ "$0" == "${BASH_SOURCE[0]}" ]]; then
     if [[ $# -lt 3 ]]; then
-        show_help
+        show_osc_help
     else
         send_osc_message "$@"
     fi
