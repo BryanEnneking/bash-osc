@@ -10,7 +10,7 @@ export OSC_PORT=10023
 ```
 
 ### From the Command-Line
-Be sure to set the IP and port as mentioned above.
+Be sure to set the IP and port as mentioned above.  Also, make sure the script is executable.
 
 **Usage:** osc *address* *type_tags* *argument_1* [*argument_2*...]
 |                      |                                            |
