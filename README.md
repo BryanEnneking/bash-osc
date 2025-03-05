@@ -44,6 +44,9 @@ osc /channel/75/config ssif "Cello 5" ON 13 00000000
 
 ```bash
 source path/to/osc
+
 OSC_IP=169.254.246.252
 OSC_PORT=10023
+
+send_osc_message /ch/01/mix/on s OFF
 ```
