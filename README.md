@@ -1,5 +1,5 @@
 # Bash OSC
-Bash OSC is a basic implementation of the Open Sound Control protocol over UDP written as a Bash script.  The goal is to provide a simple, portable, and performant utility that is not necessarily full-featured (e.g. bundles are not supported).  Care has been taken to minimize dependencies and external calls for both portability as well as performance reasons.  Bash OSC is open-source and free to use, modify, and distribute according to the BSD 3-Clause License.
+Bash OSC is an Open Sound Control client implemented as a Bash script.  It sends OSC messages via UDP.  The goal is to provide a simple, portable, and performant utility that is not necessarily full-featured (e.g. bundles are not supported).  Care has been taken to minimize dependencies and external calls for both portability as well as performance reasons.  Bash OSC is open-source and free to use, modify, and distribute according to the BSD 3-Clause License.
 
 ## Usage
 Bash OSC can be used either as a sourced library or as a stand-alone command-line utility.  Either way, you will need to set the variables ``OSC_IP`` and ``OSC_PORT`` before using Bash OSC:
